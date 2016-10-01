@@ -35,7 +35,9 @@ cd arithmos/build
 cmake -G "Eclipse CDT4 - MinGW Makefiles" ..
 ```
 
-You can now open this project file in eclipse and use build to create an executable.
+### Eclipse CDT
+You can now open this project file in eclipse and use the IDE's build to create an executable. Just import->generic->existing eclipse project
+
 You can also just run MinGW to build in command line without eclipse:
 ```bash
 mingw32-make all
