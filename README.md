@@ -1,2 +1,2 @@
 # arithmos
-A lighweight, data-driven replacement for Microsoft Project
+A lightweight, data-driven replacement for Microsoft Project
