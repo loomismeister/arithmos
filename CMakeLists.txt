@@ -16,11 +16,14 @@ add_executable(
   src/main.cc
 )
 
+target_link_libraries(${PROJECT_NAME} sqlite)
+
 add_custom_command(TARGET ${PROJECT_NAME}
   POST_BUILD
   COMMAND size $<TARGET_FILE:${PROJECT_NAME}>.exe -A)
 
 add_subdirectory(src/tests)
+add_subdirectory(libs/sqlite)
 
 option(BUILD_TESTS "Determine whether to build tests." ON)
 if(BUILD_TESTS)
