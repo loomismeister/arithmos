@@ -1,12 +1,18 @@
 SET(CMAKE_SYSTEM_NAME Generic)
 cmake_minimum_required (VERSION 3.2)
+set(CMAKE_ECLIPSE_VERSION Neon)
 project(Arithmos)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 include_directories(
   src/includes
+  libs/copperspice
 )
+
+add_subdirectory(src/tests)
+add_subdirectory(libs/sqlite)
+add_subdirectory(libs/copperspice)
 
 set(CMAKE_CXX_FLAGS "-g -DDEBUG -std=c++11 -O3 -Wall -Weffc++ -Wextra")
 
@@ -16,14 +22,16 @@ add_executable(
   src/main.cc
 )
 
-target_link_libraries(${PROJECT_NAME} sqlite)
+target_link_libraries(${PROJECT_NAME}
+  sqlite
+  CsCore
+  )
 
 add_custom_command(TARGET ${PROJECT_NAME}
   POST_BUILD
   COMMAND size $<TARGET_FILE:${PROJECT_NAME}>.exe -A)
 
-add_subdirectory(src/tests)
-add_subdirectory(libs/sqlite)
+
 
 option(BUILD_TESTS "Determine whether to build tests." ON)
 if(BUILD_TESTS)
