@@ -24,14 +24,11 @@ add_executable(
 
 target_link_libraries(${PROJECT_NAME}
   sqlite
-  CsCore
   )
 
 add_custom_command(TARGET ${PROJECT_NAME}
   POST_BUILD
   COMMAND size $<TARGET_FILE:${PROJECT_NAME}>.exe -A)
-
-
 
 option(BUILD_TESTS "Determine whether to build tests." ON)
 if(BUILD_TESTS)
