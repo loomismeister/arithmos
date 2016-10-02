@@ -1,18 +1,18 @@
 SET(CMAKE_SYSTEM_NAME Generic)
 cmake_minimum_required (VERSION 3.2)
-set(CMAKE_ECLIPSE_VERSION Neon)
 project(Arithmos)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+find_package(Qt5Widgets)
 
 include_directories(
   src/includes
-  libs/copperspice
 )
 
 add_subdirectory(src/tests)
 add_subdirectory(libs/sqlite)
-add_subdirectory(libs/copperspice)
 
 set(CMAKE_CXX_FLAGS "-g -DDEBUG -std=c++11 -O3 -Wall -Weffc++ -Wextra")
 
@@ -20,10 +20,12 @@ add_executable(
   ${PROJECT_NAME}
 
   src/main.cc
+  src/mdi.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
   sqlite
+  Qt5::Widgets
   )
 
 add_custom_command(TARGET ${PROJECT_NAME}
