@@ -1,11 +1,8 @@
+project(Arithmos)
 SET(CMAKE_SYSTEM_NAME Generic)
 cmake_minimum_required (VERSION 3.2)
-project(Arithmos)
 
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
-find_package(Qt5Widgets)
+SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 
 include_directories(
   src/includes
@@ -20,17 +17,15 @@ add_executable(
   ${PROJECT_NAME}
 
   src/main.cc
-  src/mdi.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
   sqlite
-  Qt5::Widgets
   )
 
 add_custom_command(TARGET ${PROJECT_NAME}
   POST_BUILD
-  COMMAND size $<TARGET_FILE:${PROJECT_NAME}>.exe -A)
+  COMMAND size $<TARGET_FILE:${PROJECT_NAME}> -A)
 
 option(BUILD_TESTS "Determine whether to build tests." ON)
 if(BUILD_TESTS)
